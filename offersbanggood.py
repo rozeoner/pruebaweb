@@ -13,20 +13,22 @@ class BanggoodClient(object):
         #close the connection
         f.close()
         return page
-    def search_prices(self,page):
+    def flash_offers(self,page):
         tree = bs4.BeautifulSoup(page,"lxml")
-        prices = tree.find_all("div","priceitem")
-        price_list = []
-        for price in prices:
-            price = price.find("span","price")
-            price_list.append(price.text)
-        return price_list
+        ul = tree.find_all("ul","goodlist_1")
+        li = ul.find_all("li")
+        title_list = []
+        for item in li:
+            price = price.find("span","price").text
+            title = item.find("span","title").text
+            price_list.append((title, price))
+        return title_list
 
     def run(self):
         # download a web page
         page = self.download_page()
     # seach activities in web page
-        data = self.search_prices(page)
+        data = self.flash_offers(page)
     # print the activities
         print(data)
 

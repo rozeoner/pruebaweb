@@ -1,2 +1,2 @@
 # pruebaweb
-prueba primer dia clase practica
+Código realizado en clases de Web Project
